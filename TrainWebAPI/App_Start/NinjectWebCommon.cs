@@ -1,5 +1,7 @@
 using System.Configuration;
+using System.Web.Http;
 using TrainWebAPI.Models;
+using WebApiContrib.IoC.Ninject;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(TrainWebAPI.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(TrainWebAPI.App_Start.NinjectWebCommon), "Stop")]
@@ -47,6 +49,9 @@ namespace TrainWebAPI.App_Start
             {
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
+
+                //WebAPI
+                GlobalConfiguration.Configuration.DependencyResolver = new NinjectResolver(kernel);
 
                 RegisterServices(kernel);
                 return kernel;
