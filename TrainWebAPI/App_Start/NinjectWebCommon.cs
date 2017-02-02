@@ -1,3 +1,4 @@
+using System.Configuration;
 using TrainWebAPI.Models;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(TrainWebAPI.App_Start.NinjectWebCommon), "Start")]
