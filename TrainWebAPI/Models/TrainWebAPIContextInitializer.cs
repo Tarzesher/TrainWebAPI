@@ -24,6 +24,42 @@ namespace TrainWebAPI.Models
             books.ForEach(x=> context.Books.Add(x));
             context.SaveChanges();
 
+            var order = new Order()
+            {
+                Customer = "Gabriel Tedesca", OrderDate = new DateTime(2017,10,07)
+            };
+
+            var details = new List<OrderDetail>()
+            {
+                new OrderDetail() {Book = books[0], Quantity = 1, Order = order},
+                new OrderDetail() {Book = books[2], Quantity = 2, Order = order},
+                new OrderDetail() {Book = books[4], Quantity = 3, Order = order}
+            };
+
+            context.Orders.Add(order);
+            details.ForEach(o=> context.OrderDetails.Add(o));
+            context.SaveChanges();
+
+
+            order = new Order()
+            {
+                Customer = "Tarzesher Tedesca",
+                OrderDate = new DateTime(2017, 1, 12)
+            };
+
+            details = new List<OrderDetail>()
+            {
+                new OrderDetail() {Book = books[1], Quantity = 2, Order = order},
+                new OrderDetail() {Book = books[1], Quantity = 12, Order = order},
+                new OrderDetail() {Book = books[2], Quantity = 2, Order = order},
+                new OrderDetail() {Book = books[4], Quantity = 2, Order = order}
+            };
+
+            context.Orders.Add(order);
+            details.ForEach(o => context.OrderDetails.Add(o));
+            context.SaveChanges();
+
+
             base.Seed(context);
         }
     }

@@ -12,7 +12,7 @@ using TrainWebAPI.Models;
 
 namespace TrainWebAPI.Controllers
 {
-    public class BooksController : ApiController
+    public class BookController : ApiController
     {
         private TrainWebAPIContext db = new TrainWebAPIContext();
 
